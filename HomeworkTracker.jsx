@@ -532,22 +532,6 @@ aria-label="保護者メニュー"
                   handleDragEnd();
                 }}
               >
-                <div 
-                  className="text-gray-400 cursor-move px-2 py-1 touch-none select-none"
-                  draggable="true"
-                  onDragStart={(e) => {
-                    handleDragStart(e, index);
-                    e.stopPropagation();
-                  }}
-                  onTouchStart={(e) => {
-                    e.currentTarget.style.opacity = '0.5';
-                  }}
-                  onTouchEnd={(e) => {
-                    e.currentTarget.style.opacity = '1';
-                  }}
-                >
-                  ☰
-                </div>
                 <div className="flex flex-col gap-0.5">
                   <button
                     onClick={(e) => {
