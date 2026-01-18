@@ -331,6 +331,20 @@ const handleDragEnd = () => {
 setDraggedSubject(null);
 };
 
+const moveSubjectUp = (index) => {
+if (index === 0) return;
+const newSubjects = [...subjects];
+[newSubjects[index - 1], newSubjects[index]] = [newSubjects[index], newSubjects[index - 1]];
+setSubjects(newSubjects);
+};
+
+const moveSubjectDown = (index) => {
+if (index === subjects.length - 1) return;
+const newSubjects = [...subjects];
+[newSubjects[index], newSubjects[index + 1]] = [newSubjects[index + 1], newSubjects[index]];
+setSubjects(newSubjects);
+};
+
 const savePassword = () => {
 if (newPasswordInput?.trim()) {
 setParentPassword(newPasswordInput.trim());
@@ -505,24 +519,60 @@ aria-label="保護者メニュー"
               className={`border-2 ${colors.border} rounded-xl overflow-hidden ${
                 draggedSubject === index ? 'opacity-50' : ''
               }`}
-              onDragOver={(e) => handleDragOver(e, index)}
             >
               {/* ヘッダー部分 - クリックで展開/折りたたみ */}
               <div 
                 className={`p-4 ${colors.bgLight} flex items-center gap-3`}
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  handleDragOver(e, index);
+                }}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  handleDragEnd();
+                }}
               >
                 <div 
-                  className="text-gray-400 cursor-move px-2 py-1"
-                  draggable={isEditingThis ? "false" : "true"}
+                  className="text-gray-400 cursor-move px-2 py-1 touch-none select-none"
+                  draggable="true"
                   onDragStart={(e) => {
-                    if (!isEditingThis) {
-                      handleDragStart(e, index);
-                      e.stopPropagation();
-                    }
+                    handleDragStart(e, index);
+                    e.stopPropagation();
                   }}
-                  onDragEnd={handleDragEnd}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.opacity = '0.5';
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                  }}
                 >
                   ☰
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveSubjectUp(index);
+                    }}
+                    disabled={index === 0}
+                    className={`text-xs px-1.5 py-0.5 rounded ${
+                      index === 0 ? 'text-gray-300' : 'text-gray-500 hover:bg-gray-200'
+                    }`}
+                  >
+                    ▲
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      moveSubjectDown(index);
+                    }}
+                    disabled={index === subjects.length - 1}
+                    className={`text-xs px-1.5 py-0.5 rounded ${
+                      index === subjects.length - 1 ? 'text-gray-300' : 'text-gray-500 hover:bg-gray-200'
+                    }`}
+                  >
+                    ▼
+                  </button>
                 </div>
                 <div 
                   className="flex-1 flex items-center gap-3 cursor-pointer"
@@ -1013,9 +1063,7 @@ aria-label="保護者メニュー"
                         key={subject.id}
                         className={`w-full ${colors.bgLight} flex items-center justify-center text-xs font-semibold text-gray-700 tabular-nums`}
                         style={{ 
-                          height: `${height}%`,
-                          border: `2px solid ${colors.borderColor}`,
-                          borderTopWidth: idx > 0 ? '0' : '2px'
+                          height: `${height}%`
                         }}
                       >
                         {targets.dailyTarget > 0 && targets.dailyTarget}
