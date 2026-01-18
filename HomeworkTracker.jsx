@@ -92,10 +92,10 @@ const todayKey = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate
 const selectedDateKey = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
 
 const colorMap = {
-blue: { bg: 'bg-blue-500', bgLight: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-500' },
-green: { bg: 'bg-green-500', bgLight: 'bg-green-50', text: 'text-green-600', border: 'border-green-500' },
-amber: { bg: 'bg-amber-500', bgLight: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-500' },
-purple: { bg: 'bg-purple-500', bgLight: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-500' }
+blue: { bg: 'bg-blue-500', bgLight: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-500', borderColor: '#3b82f6' },
+green: { bg: 'bg-green-500', bgLight: 'bg-green-50', text: 'text-green-600', border: 'border-green-500', borderColor: '#22c55e' },
+amber: { bg: 'bg-amber-500', bgLight: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-500', borderColor: '#f59e0b' },
+purple: { bg: 'bg-purple-500', bgLight: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-500', borderColor: '#a855f7' }
 };
 
 const availableIcons = ['📚', '✏️', '📝', '📓', '📕', '📗', '📘', '📙', '🎓', '✨'];
@@ -513,10 +513,12 @@ aria-label="保護者メニュー"
               >
                 <div 
                   className="text-gray-400 cursor-move px-2 py-1"
-                  draggable={!isEditingThis}
+                  draggable={isEditingThis ? "false" : "true"}
                   onDragStart={(e) => {
-                    handleDragStart(e, index);
-                    e.stopPropagation();
+                    if (!isEditingThis) {
+                      handleDragStart(e, index);
+                      e.stopPropagation();
+                    }
                   }}
                   onDragEnd={handleDragEnd}
                 >
@@ -1009,9 +1011,10 @@ aria-label="保護者メニュー"
                     return (
                       <div
                         key={subject.id}
-                        className={`w-full ${colors.bgLight} border-2 ${colors.border} flex items-center justify-center text-xs font-semibold text-gray-700 tabular-nums`}
+                        className={`w-full ${colors.bgLight} flex items-center justify-center text-xs font-semibold text-gray-700 tabular-nums`}
                         style={{ 
                           height: `${height}%`,
+                          border: `2px solid ${colors.borderColor}`,
                           borderTopWidth: idx > 0 ? '0' : '2px'
                         }}
                       >
