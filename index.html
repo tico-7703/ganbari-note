@@ -10,56 +10,64 @@
   
   <title>がんばりノート</title>
   
+  <!-- Manifest -->
   <link rel="manifest" href="./manifest.json">
+  
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="./icon-192.png">
   <link rel="apple-touch-icon" href="./icon-192.png">
   
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
+    /* iOS Safariのセーフエリア対応 */
     body {
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
+    
+    /* スクロールを滑らかに */
     html {
       scroll-behavior: smooth;
     }
+    
+    /* タッチ操作の最適化 */
     * {
       -webkit-tap-highlight-color: transparent;
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-  <div id="app" class="container mx-auto px-4 py-6 max-w-2xl">
-    <header class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-800 mb-2">📚 がんばりノート</h1>
-      <p class="text-gray-600">学習記録アプリ</p>
-    </header>
-    
-    <div class="bg-white rounded-3xl shadow-lg p-6 mb-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">✅ デプロイ成功！</h2>
-      <div class="space-y-3 text-gray-700">
-        <p>✨ このメッセージが見えたら、アプリは正常に動作しています。</p>
-        <p>🎉 次のステップ：完全版のアプリをアップロードします。</p>
-        <div class="bg-blue-50 p-4 rounded-lg mt-4">
-          <p class="font-semibold text-blue-900">📱 ホーム画面に追加できます：</p>
-          <ol class="list-decimal list-inside text-sm mt-2 space-y-1 text-blue-800">
-            <li>Safariの共有ボタン（□↑）をタップ</li>
-            <li>「ホーム画面に追加」を選択</li>
-            <li>「追加」をタップ</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    
-    <div class="text-center text-sm text-gray-500">
-      <p>Version 1.0 - Test Build</p>
-    </div>
-  </div>
+<body>
+  <div id="root"></div>
   
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- HomeworkTracker Component -->
+  <script type="text/babel" src="./HomeworkTracker.jsx"></script>
+  
+  <script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<HomeworkTracker />);
+  </script>
+  
+  <!-- Service Worker登録 -->
   <script>
-    console.log('✅ App loaded successfully!');
-    console.log('📍 URL:', window.location.href);
-    console.log('📱 User Agent:', navigator.userAgent);
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registered:', registration);
+          })
+          .catch((error) => {
+            console.log('Service Worker registration failed:', error);
+          });
+      });
+    }
   </script>
 </body>
 </html>
