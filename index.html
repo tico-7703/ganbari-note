@@ -2,72 +2,41 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="がんばりノート">
-  <meta name="theme-color" content="#3b82f6">
-  
-  <title>がんばりノート</title>
-  
-  <!-- Manifest -->
-  <link rel="manifest" href="./manifest.json">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="./icon-192.png">
-  <link rel="apple-touch-icon" href="./icon-192.png">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>がんばりノート - テスト</title>
   <style>
-    /* iOS Safariのセーフエリア対応 */
     body {
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      margin: 0;
+      padding: 20px;
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    
-    /* スクロールを滑らかに */
-    html {
-      scroll-behavior: smooth;
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
-    
-    /* タッチ操作の最適化 */
-    * {
-      -webkit-tap-highlight-color: transparent;
+    h1 {
+      font-size: 48px;
+      margin: 0 0 20px 0;
+    }
+    p {
+      font-size: 24px;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-  
-  <!-- React CDN -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  
-  <!-- Babel Standalone for JSX -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
-  <!-- HomeworkTracker Component -->
-  <script type="text/babel" src="./HomeworkTracker.jsx"></script>
-  
-  <script type="text/babel">
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<HomeworkTracker />);
-  </script>
-  
-  <!-- Service Worker登録 -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registered:', registration);
-          })
-          .catch((error) => {
-            console.log('Service Worker registration failed:', error);
-          });
-      });
-    }
-  </script>
+  <div class="container">
+    <h1>📚 がんばりノート</h1>
+    <p>接続成功！</p>
+    <p style="font-size: 16px; margin-top: 20px;">このメッセージが見えたら、デプロイは成功しています。</p>
+  </div>
 </body>
 </html>
