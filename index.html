@@ -2,41 +2,64 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>がんばりノート - テスト</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="がんばりノート">
+  <meta name="theme-color" content="#3b82f6">
+  
+  <title>がんばりノート</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
   <style>
     body {
-      margin: 0;
-      padding: 20px;
-      font-family: sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
-    .container {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    html {
+      scroll-behavior: smooth;
     }
-    h1 {
-      font-size: 48px;
-      margin: 0 0 20px 0;
-    }
-    p {
-      font-size: 24px;
-      color: #666;
+    * {
+      -webkit-tap-highlight-color: transparent;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>📚 がんばりノート</h1>
-    <p>接続成功！</p>
-    <p style="font-size: 16px; margin-top: 20px;">このメッセージが見えたら、デプロイは成功しています。</p>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <div id="app" class="container mx-auto px-4 py-6 max-w-2xl">
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">📚 がんばりノート</h1>
+      <p class="text-gray-600">学習記録アプリ</p>
+    </header>
+    
+    <div class="bg-white rounded-3xl shadow-lg p-6 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">✅ デプロイ成功！</h2>
+      <div class="space-y-3 text-gray-700">
+        <p>✨ このメッセージが見えたら、アプリは正常に動作しています。</p>
+        <p>🎉 次のステップ：完全版のアプリをアップロードします。</p>
+        <div class="bg-blue-50 p-4 rounded-lg mt-4">
+          <p class="font-semibold text-blue-900">📱 ホーム画面に追加できます：</p>
+          <ol class="list-decimal list-inside text-sm mt-2 space-y-1 text-blue-800">
+            <li>Safariの共有ボタン（□↑）をタップ</li>
+            <li>「ホーム画面に追加」を選択</li>
+            <li>「追加」をタップ</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center text-sm text-gray-500">
+      <p>Version 1.0 - Test Build</p>
+    </div>
   </div>
+  
+  <script>
+    console.log('✅ App loaded successfully!');
+    console.log('📍 URL:', window.location.href);
+    console.log('📱 User Agent:', navigator.userAgent);
+  </script>
 </body>
 </html>
